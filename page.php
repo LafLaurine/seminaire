@@ -13,24 +13,20 @@ if (!isset($_SESSION['email'])) {
  if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
+
+require_once "lang/lang.php";
+
+
 $flux_list = (new ControllerFlux())->getAllActifFlux();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $_SESSION['lang']; ?>">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Mews</title>
-<style>
-.table-of-contents a.active {
-  border-left: 2px solid #1976D2!important;
-}
-nav .nav-wrapper img{
-  margin-left: 10px;
-  margin-top: 3px;
-}
-</style>
+
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css">
@@ -38,26 +34,46 @@ nav .nav-wrapper img{
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
   <script src="./js/affichageArticles.js"></script>
-  <link rel="icon" type="image/png" href="img/logo/fav.ico" />
+  <link rel="icon" type="image/png" href="img/logo/fav.ico"/>
+  <link type="text/css" rel="stylesheet" href="css/font-awesome.css"/>
+  <style>
+  .table-of-contents a.active {
+    border-left: 2px solid #1976D2!important;
+  }
+  nav .nav-wrapper img{
+    margin-left: 10px;
+    margin-top: 3px;
+  }
+  .social-footer{
+    float: left;
+    margin-left: 10px;
+  }
+  </style>
 </head>
 <body>
   <div class="navbar-fixed">
     <nav class="white">
       <div class="nav-wrapper">
-        <a id="logo-container" href="#" class="brand-logo"><img src="img/logo/logo.png" width="190px" height="auto" /></a>
+        <a id="logo-container" href="" class="brand-logo"><img src="img/logo/logo.png" width="190px" height="auto" /></a>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
+          <li><a href="?lang=fr"><img width="35px" src="img/flag/fr.png"></a></li>
+          <li><a href="?lang=en"><img width="38px" src="img/flag/en.png"></a></li>
+          <li><a href="?lang=bg"><img width="40px" src="img/flag/bg.png"></a></li>
           <li><a class="page" href="./index.php"><i class="material-icons" style="color:black;">home</i></a></li>
-          <li><a class="page" href="./favori.php">Mes favoris</a></li>
-          <li><a class="deco" href="./model/logout.php">Déconnexion</a></li>
+          <li><a class="page" href="./favori.php"><?php echo _FAV; ?></a></li>
+          <li><a class="deco" href="./model/logout.php"><?php echo _DECONNEXION; ?></a></li>
         </ul>
       </div>
     </nav>
   </div>
   <ul id="nav-mobile" class="side-nav">
     <li><a class="page" href="./index.php"><i class="material-icons" style="color:black;">home</i></a></li>
-    <li><a class="page" href="./favori.php">Mes favoris</a></li>
-      <li><a href="./model/logout.php">Déconnexion</a></li>
+    <li><a class="page" href="./favori.php"><?php echo _FAV; ?></a></li>
+      <li><a href="./model/logout.php"><?php echo _DECONNEXION; ?></a></li>
+      <li><a href="?lang=fr"><img width="35px" src="img/flag/fr.png"></a></li>
+      <li><a href="?lang=en"><img width="38px" src="img/flag/en.png"></a></li>
+      <li><a href="?lang=bg"><img width="40px" src="img/flag/bg.png"></a></li>
   </ul>
 
 
@@ -89,7 +105,7 @@ nav .nav-wrapper img{
 	   <div class="container" style="margin-top: 20px;">
 		   <div class="row">
 			   <div class="col s12 m9">
-					<h4 class="left">Fil d'actualité de  <?php print_r($_SESSION['firstname']); ?></h1>
+					<h4 class="left"><?php echo _FILOF; print_r($_SESSION['firstname']); ?></h1>
         </div>
 
 
@@ -101,15 +117,15 @@ nav .nav-wrapper img{
       <!-- Modal Structure -->
       <div id="modal1" class="modal">
         <div class="modal-content">
-          <h4>Paramètres</h4>
+          <h4><?php echo _PARAM; ?></h4>
           <div class="listeFlux">
-          <div class="head"><h2 class="flux">Liste de flux <span id="compteur_flux"><span id="compteur_flux"><?php echo count($flux_list)?></span> / <span id="limite_flux">6</span></span></h2></div>
+          <div class="head"><h2 class="flux"><?php echo _LISTFLUX; ?> <span id="compteur_flux"><span id="compteur_flux"><?php echo count($flux_list)?></span> / <span id="limite_flux">6</span></span></h2></div>
             <ul>
               <li>gnheal
               <input type="checkbox">
               <div class="Switch Round">
                 <div class="Toggle"></div>
-                
+
               </div>
               <span class="bout label-primary">Primary Label</span>
                 <span class="bout label-success">Success Label</span>
@@ -118,16 +134,16 @@ nav .nav-wrapper img{
           </div>
         </div>
         <div class="modal-footer">
-          <a href="#!" class="modal-action modal-close waves-effect waves-blue btn-flat">Merci</a>
+          <a href="#!" class="modal-action modal-close waves-effect waves-blue btn-flat"><?php echo _MERCI; ?></a>
         </div>
       </div>
 
             <!-- Modal Structure -->
             <div id="modal2" class="modal">
         <div class="modal-content">
-          <h4>Mots clef</h4>
+          <h4><?php echo _KWORD; ?></h4>
           <form>
-          <label for="keywords">Mots clef (séparés par des virgules)</label>
+          <label for="keywords"><?php echo _SKWORD; ?></label>
           <input type="text" name="keywords" id="keywords"/>
           </form>
         </div>
@@ -162,7 +178,7 @@ nav .nav-wrapper img{
         <div class="col hide-on-small-only m3 l3" style="float:right;">
             <div class="toc-wrapper pinned" style="top: 100px;">
               <div class="buysellads hide-on-small-only">
-                <h6>Mots clefs</h6>
+                <h6><?php echo _KWORD; ?></h6>
               </div>
               <div style="height: 1px;">
                 <ul class="section table-of-contents">
@@ -179,7 +195,7 @@ nav .nav-wrapper img{
         <div class="col hide-on-small-only m2 l3" style="float:right;">
             <div class="toc-wrapper pinned" style="top: 100px;">
               <div class="buysellads hide-on-small-only">
-                <h6>Top articles</h6>
+                <h6><?php echo _TREND; ?></h6>
               </div>
               <div style="height: 1px;">
                 <ul class="section table-of-contents">
@@ -199,17 +215,21 @@ nav .nav-wrapper img{
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-        </div>
+            <h5 class="white-text"><?php echo _SOCIAL; ?></h5>
+            <ul>
+                <li class="social-footer"><a href="https://www.facebook.com/MewsTeam/?hc_ref=ARROciI1DEdfsZ-LjIlr1VHrxj88BLI1plRKAXzn3IHOMF7-i7O5fSXCtJfS3s5V1vc&fref=nf" target="_blank"><i style='color:white;' class="socialfoot fa fa-facebook-square fa-3x" aria-hidden="true"></i></a></li>
+                <li class="social-footer"><a href="https://twitter.com/wearemews?lang=fr" target="_blank"> <i style='color:white;' class="socialfoot fa fa-twitter-square fa-3x" aria-hidden="true"></i></a></li>
+                <li class="social-footer"><a href="https://www.linkedin.com/in/mews-team-9b240115b/" target="_blank"> <i style='color:white;' class="socialfoot fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+              </ul>
+          </div>
 
         <div class="col l3 s12 right">
-          <h5 class="white-text">Liens</h5>
+          <h5 class="white-text"><?php echo _SOCIAL; ?></h5>
           <ul>
-            <li><a class="white-text" href="pages/apropos.html">A propos</a></li>
-            <li><a class="white-text" href="pages/FAQ.html">FAQ</a></li>
-            <li><a class="white-text" href="pages/mentionslegales.html">Mentions légales</a></li>
-            <li><a class="white-text" href="pages/conditions.html">Conditions générales d'Utilisation</a></li>
+            <li><a class="white-text" href="pages/apropos.php"><?php echo _ABOUT; ?></a></li>
+            <li><a class="white-text" href="pages/FAQ.php"><?php echo _FAQ; ?></a></li>
+            <li><a class="white-text" href="pages/mentionslegales.php"><?php echo _MENTION; ?></a></li>
+            <li><a class="white-text" href="pages/conditions.php"><?php echo _USE; ?></a></li>
           </ul>
         </div>
       </div>

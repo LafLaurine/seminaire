@@ -6,11 +6,42 @@ if (session_status() == PHP_SESSION_NONE) {
    session_start();
 }
 
+if(!isset($_SESSION['lang'])){
+    $_SESSION['lang'] = "fr";
+  require_once "../lang/fr.inc";
+}
+
+
+if(isset($_GET['lang']) && $_GET['lang'] == "fr"){
+  $_SESSION['lang'] = "fr";
+  require_once "../lang/fr.inc";
+}else if(isset($_GET['lang']) && $_GET['lang'] == "en"){
+  $_SESSION['lang'] = "en";
+  require_once "../lang/en.inc";
+}else if(isset($_GET['lang']) && $_GET['lang'] == "bg"){
+    $_SESSION['lang'] = "bg";
+    require_once "../lang/bg.inc";
+}
+
+if(!isset($_GET['lang'])){
+if(isset($_SESSION['lang']) && $_SESSION['lang']=='fr'){
+  require_once "../lang/fr.inc";
+  }
+
+if(isset($_SESSION['lang']) && $_SESSION['lang']=='en'){
+  require_once "../lang/en.inc";
+}
+
+if(isset($_SESSION['lang']) && $_SESSION['lang']=='bg'){
+  require_once "../lang/bg.inc";
+}
+
+}
 
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?php echo $_SESSION['lang']; ?>">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -20,76 +51,107 @@ if (session_status() == PHP_SESSION_NONE) {
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="css/font-awesome.css"/>
+  <style>
+      body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    }
 
+    main {
+    flex: 1 0 auto;
+    }
+    .social-footer{
+      float: left;
+      margin-left: 10px;
+    }
+  </style>
 </head>
 <body>
-  <nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo"><img src="../img/logo/logo.png" width="190px" height="auto" /></a>
-      <ul class="right hide-on-med-and-down">
-        <?php if(isset($_SESSION['email'])):?>
-        <li><a class="deco" href="../model/logout.php">Déconnexion</a></li>
+  <div class="navbar-fixed">
+    <nav class="white">
+      <div class="nav-wrapper">
+        <a id="logo-container" href="" class="brand-logo"><img src="../img/logo/logo.png" width="190px" height="auto" /></a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <?php if(isset($_SESSION['email'])):?>
+            <li><a href="?lang=fr"><img width="35px" src="../img/flag/fr.png"></a></li>
+            <li><a href="?lang=en"><img width="38px" src="../img/flag/en.png"></a></li>
+            <li><a href="?lang=bg"><img width="40px" src="../img/flag/bg.png"></a></li>
+            <li><a href="../page.php"><?php echo _FIL; ?></a></li>
+            <li><a href="../favori.php"><?php echo _FAV; ?></a></li>
+            <li><a class="deco" href="../model/logout.php"><?php echo _DECONNEXION; ?></a></li>
+          </ul>
+        <?php else: ?>
+          <li><a href="?lang=fr"><img width="35px" src="../img/flag/fr.png"></a></li>
+          <li><a href="?lang=en"><img width="38px" src="../img/flag/en.png"></a></li>
+          <li><a href="?lang=bg"><img width="40px" src="../img/flag/bg.png"></a></li>
+
         </ul>
-        <ul id="nav-mobile" class="side-nav">
-        		<li><a href="../model/logout.php">Déconnexion</a></li>
-            <?php else: ?>
-   <li><a class="modal-trigger" href="#modalInscription">Inscription</a></li>
-        <li><a class="modal-trigger" href="#modalConnexion">Connexion</a></li>
+
+
+
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    <?php endif; ?>
+  </nav>
+</div>
+
+<?php if(isset($_SESSION['email'])):?>
+
+<ul id="nav-mobile" class="side-nav">
+  <li><a href="./page.php"><?php echo _FIL; ?></a></li>
+  <li><a href="./favori.php"><?php echo _FAV; ?></a></li>
+  <li><a href="./model/logout.php"><?php echo _DECONNEXION; ?></a></li>
+</ul>
+<?php else: ?>
+
+<ul id="nav-mobile" class="side-nav">
+  <li><a href="#modalInscription"><?php echo _INSCRIPTION; ?></a></li>
+  <li><a href="#modalConnexion"><?php echo _CONNEXION; ?></a></li>
+</ul>
+<?php endif; ?>
+
+
+<main>
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+<p class="center-align"><?php echo _QMEWS; ?></p>
+
+<?php echo _TEXTFAQ; ?></div>
+</div>
+</div>
+</main>
+<footer class="page-footer blue darken-2">
+<div class="container">
+<div class="row">
+<div class="col l6 s12">
+    <h5 class="white-text"><?php echo _SOCIAL; ?></h5>
+    <ul>
+        <li class="social-footer"><a href="https://www.facebook.com/MewsTeam/?hc_ref=ARROciI1DEdfsZ-LjIlr1VHrxj88BLI1plRKAXzn3IHOMF7-i7O5fSXCtJfS3s5V1vc&fref=nf" target="_blank"><i style='color:white;' class="socialfoot fa fa-facebook-square fa-3x" aria-hidden="true"></i></a></li>
+        <li class="social-footer"><a href="https://twitter.com/wearemews?lang=fr" target="_blank"> <i style='color:white;' class="socialfoot fa fa-twitter-square fa-3x" aria-hidden="true"></i></a></li>
+        <li class="social-footer"><a href="https://www.linkedin.com/in/mews-team-9b240115b/" target="_blank"> <i style='color:white;' class="socialfoot fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
       </ul>
+  </div>
 
-      <ul id="nav-mobile" class="side-nav">
-		<li><a href="#modalInscription">Inscription</a></li>
-        <li><a href="#modalConnexion">Connexion</a></li>
-      </ul>
+<div class="col l3 s12 right">
+  <h5 class="white-text"><?php echo _SOCIAL; ?></h5>
+  <ul>
+    <li><a class="white-text" href="apropos.php"><?php echo _ABOUT; ?></a></li>
+    <li><a class="white-text" href="FAQ.php"><?php echo _FAQ; ?></a></li>
+    <li><a class="white-text" href="mentionslegales.php"><?php echo _MENTION; ?></a></li>
+    <li><a class="white-text" href="conditions.php"><?php echo _USE; ?></a></li>
+  </ul>
+</div>
+</div>
+</div>
+<div class="footer-copyright">
+<div class="container">
 
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-      <?php endif; ?>
-</nav>
-
-<p style="text-align:center">Qu’est ce que Mews ?</p>
-
-<p style="text-align:justify">Mews est une plateforme d’information créée en 2018.  Elle regroupe un grand nombre d’articles sur tous les sujets d’actualité. Avec Mews, vous êtes au centre de l’information. C’est vous qui choisissez les articles que vous voulez lire. Ainsi, votre fil d’actualité et constamment mis à jour en fonction de vos préférences. 
-</p>
-
-<p style="text-align:center">Comment me connecter sur Mews ?</p>
-
-<p style="text-align:justify">Vous possédez déjà un compte Mews
-    Si vous possédez déjà un compte sur Mews, il vous suffit de cliquer sur le bouton “Me connecter” en haut à droite. Vous devez ensuite entrer votre identifiant et votre mot de passe dans les champs prévus à cet effet.
-Vous ne possédez pas de compte Mews
-    Si vous ne possédez pas de compte sur Mews, il vous suffit de cliquer sur le bouton “M’inscrire”. Plusieurs informations vous seront ensuite demandées telles que votre nom, prénom, adresse mail et mot de passe. Un mail vous sera envoyé pour confirmer la création de votre compte.
-</p>
-
-
-<p style="text-align:center">Comment modifier mon fil d’actualités ?</p>
-
-<p style="text-align:justify">
-    Afin de modifier votre fil d'actualité, vous êtes invité à cliquer sur l'engrenage. Au clique de celui-ci, vous pourrez activer ou désactiver un flux en cliquant sur le bouton situé à droite du nom du flux.
-    Il y est aussi indiqué de quel catégorie et de quelle langue est issu un flux.
-</p>
-
-<p style="text-align:center">Je ne me souviens plus de mes identifiants, me permettant de me connecter</p>
-
-<p style="text-align:justify">
-Si vous ne vous souvenez plus de vos identifiants,  il vous sera demandé d'inscrire votre adresse mail avec laquelle vous vous êtes inscrits. Puis un mail de : wearemews@hotmail.com vous sera envoyé, afin de vous rappeler votre mot de passe. 
-</p>
-
-<p style="text-align:center">Vous avez constaté un fonctionnement anormal ?</p>
-
-<p style="text-align:justify">
-Malgré les mises à jour constantes du site, il est possible qu’un petit dysfonctionnement intervienne. Si vous constatez le moindre problème ou dysfonctionnement, n’hésitez pas à nous le signaler à l’adresse suivante : wearemews@hotmail.com. Tous vos retours et signalements nous seront très utiles afin d’améliorer nos services.
-</p>
-
-<p style="text-align:center">Vous avez constaté un fonctionnement anormal ?</p>
-
-<p style="text-align:justify">
-Malgré les mises à jour constantes du site, il est possible qu’un petit dysfonctionnement intervienne. Si vous constatez le moindre problème ou dysfonctionnement, n’hésitez pas à nous le signaler à l’adresse suivante : wearemews@hotmail.com. Tous vos retours et signalements nous seront très utiles afin d’améliorer nos services.
-</p>
-
-<p style="text-align:center">Je souhaite supprimer mon compte</p>
-
-<p style="text-align:justify">
-Si vous souhaitez supprimer définitivement votre compte, vous devez envoyer un mail à l’adresse suivante : wearemews@hotmail.com. Une confirmation vous sera envoyée presque immédiatement sur l'adresse email reliée à votre compte.</p>
-
+</div>
+</div>
+</footer>
 </body>
 </html>

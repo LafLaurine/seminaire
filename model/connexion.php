@@ -6,7 +6,7 @@ function connectBd () {
     $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
     /* Indique le charset */
     $pdo_options[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES utf8";
-    return new PDO('mysql:host=localhost;dbname=seminaire', 'root', 'root',$pdo_options);
+    return new PDO('mysql:host=localhost;dbname=seminaire', 'root', '',$pdo_options);
 }
 
 ?>
