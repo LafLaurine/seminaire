@@ -175,26 +175,48 @@ class ControllerFlux{
     public function getMotclef(){
         $db = connectBd();
         $list = array();
-        $req= $db->prepare("SELECT mot_clef FROM mot_clef GROUP BY mot_clef ORDER BY COUNT(*) DESC LIMIT 10");
+        $req= $db->prepare("SELECT COUNT(*) as 'nb',mot_clef,mot_clef.id_mot_clef as 'id' FROM mot_clef JOIN fav_mot_clef ON fav_mot_clef.id_mot_clef=mot_clef.id_mot_clef GROUP BY mot_clef.id_mot_clef ORDER BY 'nb' DESC,'id' DESC LIMIT 10");
         $req->execute();
         while($keyword = $req->fetch(PDO::FETCH_ASSOC))
         {
-        $data = $keyword['mot_clef'];
-        array_push($list,$data);
+            $data = array();
+            $data['mot_clef'] = $keyword['mot_clef'];
+            $data['nb'] = $keyword['nb'];
+            $data['id'] = $keyword['id'];
+            array_push($list,$data);
         }
   
         return $list;
       }
   
-      public function getFavoriteArticle(){
+      public function getFavoriteArticleByKeyword($keyword){
         $db = connectBd();
         $list = array();
-        $req= $db->prepare("SELECT titre FROM article INNER JOIN favori ON article.id_article = favori.id_article GROUP BY favori.id_article ORDER BY COUNT(favori.id_article) DESC LIMIT 10");
+        $req= $db->prepare("SELECT * FROM article JOIN favori ON article.id_article = favori.id_article JOIN fav_mot_clef ON fav_mot_clef.id_favori=favori.id_favori JOIN mot_clef ON mot_clef.id_mot_clef=fav_mot_clef.id_mot_clef WHERE mot_clef=:key ORDER BY favori.id_favori DESC LIMIT 10");
+        $req->bindParam("key",$keyword);
         $req->execute();
         while($favArticle = $req->fetch(PDO::FETCH_ASSOC))
         {
-        $data = $favArticle['titre'];
-        array_push($list,$data);
+            $data = array();
+            $data['titre'] = $favArticle['titre'];
+            $data['url']=$favArticle['url'];
+            array_push($list,$data);
+        }
+  
+        return $list;
+      }
+
+      public function getFavoriteArticle(){
+        $db = connectBd();
+        $list = array();
+        $req= $db->prepare("SELECT * FROM article JOIN favori ON article.id_article = favori.id_article ORDER BY favori.id_favori DESC LIMIT 10");
+        $req->execute();
+        while($favArticle = $req->fetch(PDO::FETCH_ASSOC))
+        {
+            $data = array();
+            $data['titre'] = $favArticle['titre'];
+            $data['url']=$favArticle['url'];
+            array_push($list,$data);
         }
   
         return $list;

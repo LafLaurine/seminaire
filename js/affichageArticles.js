@@ -4,6 +4,8 @@ var flux_URIs = [];
 
 var flux_actif = [];
 
+var flux_timer = {};
+
 $( document ).ready(function(){
 
 	get_active_flux_list().done(data => {refresh_all(data); }).fail((xhr, status, error)=>{console.log(xhr,status,error);});
@@ -14,8 +16,12 @@ $( document ).ready(function(){
 		
 				e.preventDefault();
 				var i = $(".hide").index(this);
-		
-				$(".article").eq(i).fadeOut();				
+				remove(flux_actif[i]);				
+	});
+
+	
+	$('.flux>.card').click(function() {
+		$(this).find(".articles_list").eq(0).toggle();
 	});
 
 	$('.modal-trigger').click(function() {
@@ -32,8 +38,6 @@ $( document ).ready(function(){
 	});
 
 	$('body').on("click",".refreshTrigger",function() {
-		$('.refresh-wrapper').toggleClass('open');
-	   $('.site').toggleClass('blur');
 	});
 
 });
@@ -117,8 +121,8 @@ function remove(uri){
 			},
 		dataType:'html',
 		success : function(data){
-			$(".flux_list").children().eq(flux_URIs.indexOf(uri)).remove();
-			flux_URIs.splice(flux_URIs.indexOf(uri), 1);
+			$(".flux_list").find('.flux').eq(flux_actif.indexOf(uri)).remove();
+			flux_actif.splice(flux_actif.indexOf(uri), 1);
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			/*$('#waiting').hide(500);
@@ -145,6 +149,7 @@ function add(uri){
             dataType:'html',
 			success : function(data){
 				$(".flux_list").append(data);
+
 				if (data == '') {
 					alert("Perte de connexion");
 				}
@@ -180,6 +185,8 @@ function render(list)
 		var flux = list[key];
 
 		var balise = "<li>";
+		balise+='<span class="bout label-primary" style="background-color:#777;">'+flux.category.cat_name+'</span>';
+		balise+='<span class="bout label-success"  style="background-color:#856;">'+flux.langue+'</span>';
 		balise+=flux.titre;
 		balise+='<input type="checkbox">';
 		balise+='<div class="Switch Round">';
@@ -276,7 +283,6 @@ function fav(uri)
 		dataType:'html',
 		success : function(data){
 			keywords: $("#keywords").val("");		
-			//TODO : changer classe et text() de la div "Favori"
 			$('.fav').addClass('dejaFav');
 			$('.fav').val('Déjà en favori');
 		},

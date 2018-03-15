@@ -1,8 +1,6 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT']. '/seminaire/controller/controllerFlux.php';
-//require_once $_SERVER['DOCUMENT_ROOT']. '/seminaire/localization.php';
-
 
 if (session_status() == PHP_SESSION_NONE) {
    session_start();
@@ -82,81 +80,80 @@ require_once "lang/lang.php";
   <li><a href="?lang=bg"><img width="40px" src="img/flag/bg.png"></a></li>
 </ul>
 <?php endif; ?>
-	  <!--   Présentation   -->
-
 
     <!-- ERROR MESSAGES -->
-     <?php if(isset($_SESSION['flash'])):?>
-       <?php foreach ($_SESSION['flash'] as $type => $message):
-         unset($_SESSION['flash']);?>
-         <div class="alert alert-<?= $type; ?>">
-           <?= $message; ?>
-         </div>
-
-       <?php endforeach; ?>
-     <?php endif; ?>
-
-       <?php if(isset($_SESSION['flash'])):?>
-         <?php foreach($_SESSION['flash'] as $type => $message): ?>
-           <div class="container">
-             <div class="row">
-               <div class="alert alert-<?= $type; ?>">
-                 <?= $message; ?>
-               </div>
-             </div>
-           </div>
-         <?php endforeach; ?>
-      <?php endif; ?>
-
-
-	   <div class="container">
-		   <div class="row">
-			   <div class="col s12">
-					<h4 class="left"><?php echo _PRESENTATION; ?></h1>
-				</div>
-			</div>
-			<div class="row">
-			   <div class="col s12">
-					<p><?php echo _TEXTEPRESENTATION; ?></p>
-				</div>
-			</div>
-       </div>
-
-      <!--   Icon Section   -->
-      <div class="container" >
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center blue-text"><i class="material-icons">autorenew</i></h2>
-            <h5 class="center"><?php echo _DESCRIPTIONUN; ?></h5>
-            <p class="light"><?php echo _TEXTEDESCRIPTIONUN; ?></p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center blue-text"><i class="material-icons">favorite</i></h2>
-            <h5 class="center"><?php echo _DESCRIPTIONDEUX; ?></h5>
-
-            <p class="light"><?php echo _TEXTEDESCRIPTIONDEUX; ?></p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center blue-text"><i class="material-icons">fiber_new</i></h2>
-            <h5 class="center"><?php echo _DESCRIPTIONTROIS; ?></h5>
-
-            <p class="light"><?php echo _TEXTEDESCRIPTIONTROIS; ?></p>
-          </div>
-        </div>
+    <?php if(isset($_SESSION['flash'])):?>
+    <?php foreach ($_SESSION['flash'] as $type => $message):
+      unset($_SESSION['flash']);?>
+      <div class="alert alert-<?= $type; ?>">
+        <?= $message; ?>
       </div>
 
+    <?php endforeach; ?>
+  <?php endif; ?>
+
+    <?php if(isset($_SESSION['flash'])):?>
+      <?php foreach($_SESSION['flash'] as $type => $message): ?>
+        <div class="container">
+          <div class="row">
+            <div class="alert alert-<?= $type; ?>">
+              <?= $message; ?>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+   <?php endif; ?>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+       <h4 class="left"><?php echo _PRESENTATION; ?></h1>
+     </div>
+   </div>
+   <div class="row">
+      <div class="col s12">
+       <p><?php echo _TEXTEPRESENTATION; ?></p>
+     </div>
+   </div>
     </div>
-  </div>
+
+   <!--   Icon Section   -->
+   <div class="container" >
+   <div class="row">
+     <div class="col s12 m4">
+       <div class="icon-block">
+         <h2 class="center blue-text"><i class="material-icons">autorenew</i></h2>
+         <h5 class="center"><?php echo _DESCRIPTIONUN; ?></h5>
+         <p class="light"><?php echo _TEXTEDESCRIPTIONUN; ?></p>
+       </div>
+     </div>
+
+     <div class="col s12 m4">
+       <div class="icon-block">
+         <h2 class="center blue-text"><i class="material-icons">favorite</i></h2>
+         <h5 class="center"><?php echo _DESCRIPTIONDEUX; ?></h5>
+
+         <p class="light"><?php echo _TEXTEDESCRIPTIONDEUX; ?></p>
+       </div>
+     </div>
+
+     <div class="col s12 m4">
+       <div class="icon-block">
+         <h2 class="center blue-text"><i class="material-icons">fiber_new</i></h2>
+         <h5 class="center"><?php echo _DESCRIPTIONTROIS; ?></h5>
+
+         <p class="light"><?php echo _TEXTEDESCRIPTIONTROIS; ?></p>
+       </div>
+     </div>
+   </div>
+
+ </div>
+</div>
+
 
 <!--  VIDEO -->
-	<div class="container">
+<div class="container">
 		<div class="row" style="text-align:center;">
     <video class="responsive-video" controls>
     <source src="./src/video.mp4" type="video/mp4">
@@ -167,18 +164,20 @@ require_once "lang/lang.php";
 		</div>
 	</div>
 
+
 <!-- REVUE DE PRESSE -->
-	   <div class="container">
-		   <div class="row">
-			   <div class="col s12">
-          <h3><?php echo _REVUE; ?></h3>
-          <p style="font-size:13pt;"><?php echo _TEXTEREVUE; ?></p>
-       <a class="btn waves-effect waves-light blue" type="submit" name="action" target="_blank" href="./src/revue.pdf"><?php echo _LIRESUITE; ?>
-    <i class="material-icons right">send</i>
-       </a>
-				</div>
-			</div>
-       </div>
+<div class="container">
+<div class="row">
+  <div class="col s12">
+   <h3><?php echo _REVUE; ?></h3>
+   <p style="font-size:13pt;"><?php echo _TEXTEREVUE; ?></p>
+<a class="btn waves-effect waves-light blue" type="submit" name="action" target="_blank" href="./src/revue.pdf"><?php echo _LIRESUITE; ?>
+<i class="material-icons right">send</i>
+</a>
+ </div>
+</div>
+</div>
+
 
   <div class="container">
     <div class="row">
@@ -234,146 +233,148 @@ require_once "lang/lang.php";
 
 
 
+
  <!-- MODAL INSCRIPTION-->
-  <div id="modalInscription" class="modal">
-    <div class="modal-content">
-      <h4><?php echo _INSCRIPTION; ?></h4>
-      <div class="row">
-       <form class="col s12" action="./model/traitementRegister.php" method="POST">
-		 <div class="row">
-			<div class="input-field col s6">
-               <label for=""><?php echo _PRENOM; ?></label>
-               <input type="text" name="firstname"/>
-               </div>
-			<div class="input-field col s6">
-                 <label for=""><?php echo _NOM; ?></label>
-                 <input type="text" name="lastname"/>
-             </div>
+ <div id="modalInscription" class="modal">
+ <div class="modal-content">
+   <h4><?php echo _INSCRIPTION; ?></h4>
+   <div class="row">
+    <form class="col s12" action="./model/traitementRegister.php" method="POST">
+  <div class="row">
+   <div class="input-field col s6">
+            <label for=""><?php echo _PRENOM; ?></label>
+            <input type="text" name="firstname"/>
+            </div>
+   <div class="input-field col s6">
+              <label for=""><?php echo _NOM; ?></label>
+              <input type="text" name="lastname"/>
+          </div>
+       </div>
+       <div class="row">
+   <div class="input-field col s6">
+     <label for=""><?php echo _DATENAISSANCE; ?></label>
+       <input type="text" class="datepicker" name="anniversary">
+     </div>
+   </div>
+          <div class="row">
+              <label for=""><?php echo _SEXE; ?></label>
+       <p>
+         <input name="sexe" type="radio" id="test1" checked/>
+         <label for="test1"><?php echo _FEMME; ?></label>
+       </p>
+       <p>
+         <input name="sexe" type="radio" id="test2" />
+         <label for="test2"><?php echo _HOMME; ?></label>
+       </p>
           </div>
           <div class="row">
-			<div class="input-field col s6">
-				<label for=""><?php echo _DATENAISSANCE; ?></label>
-					<input type="text" class="datepicker" name="anniversary">
-				</div>
-			</div>
-             <div class="row">
-                 <label for=""><?php echo _SEXE; ?></label>
-					<p>
-					  <input name="sexe" type="radio" id="test1" checked/>
-					  <label for="test1"><?php echo _FEMME; ?></label>
-					</p>
-					<p>
-					  <input name="sexe" type="radio" id="test2" />
-					  <label for="test2"><?php echo _HOMME; ?></label>
-					</p>
+     <div class="input-field col s6">
+               <label for=""><?php echo _MAIL; ?></label>
+       <input type="text" name="email"/>
+             </div>
+             <div class="input-field col s6">
+               <label for=""><?php echo _CMAIL; ?></label>
+               <input type="text" name="email_confirm"/>
+     </div>
              </div>
              <div class="row">
-				<div class="input-field col s6">
-                  <label for=""><?php echo _MAIL; ?></label>
-					<input type="text" name="email"/>
-                </div>
-                <div class="input-field col s6">
-                  <label for=""><?php echo _CMAIL; ?></label>
-                  <input type="text" name="email_confirm"/>
-				</div>
-                </div>
-                <div class="row">
-					<div class="input-field col s6">
-						<label for=""><?php echo _MDP; ?></label>
-						<input type="password" name="password"/>
-					</div>
-					<div class="input-field col s6">
-						<label for=""><?php echo _CMDP; ?></label>
-						<input type="password" name="password_confirm" />
-					</div>
-					</div>
-              </div>
-          </div>
-         <div class="modal-footer">
-            <button type="submit" class="btn waves-effect waves-light" name="submit"><?php echo _CINSCRIPTION; ?></button>
-               </div>
-            </form>
+       <div class="input-field col s6">
+         <label for=""><?php echo _MDP; ?></label>
+         <input type="password" name="password"/>
+       </div>
+       <div class="input-field col s6">
+         <label for=""><?php echo _CMDP; ?></label>
+         <input type="password" name="password_confirm" />
+       </div>
+       </div>
+           </div>
+       </div>
+      <div class="modal-footer">
+         <button type="submit" class="btn waves-effect waves-light" name="submit"><?php echo _CINSCRIPTION; ?></button>
+            </div>
+         </form>
 
 
 
-  </div>
+</div>
 
-  <?php
+<?php
 
 //gère la requête GET lorsque l'utilisateur entre un mauvais pseudo/mail
 
 if(@$_GET['action'] == 'wrongMDP' ) {
-  echo "<h2 style=\"color:#3080D0; text-align:center;\"> Les mots de passe ne correspondent pas </h2>";
- }
+echo "<h2 style=\"color:#3080D0; text-align:center;\"> Les mots de passe ne correspondent pas </h2>";
+}
 
- if(@$_GET['action'] == 'register' ) {
-  echo "<h2 style=\"color:#3080D0; text-align:center;\"> Compte enregistré </h2>";
- }
+if(@$_GET['action'] == 'register' ) {
+echo "<h2 style=\"color:#3080D0; text-align:center;\"> Compte enregistré </h2>";
+}
 
 ?>
 
-  <!-- MODAL CONNEXION-->
-  <div id="modalConnexion" class="modal">
-    <div class="modal-content">
-      <h4><?php echo _CONNEXION; ?></h4>
-      <div class="row">
-       <form class="col s12" action="./model/traitementLogin.php" method="POST">
-		 <div class="row">
-			<div class="input-field col s12">
-                <label for=""><?php echo _MAIL; ?></label>
-				<input type="text" name="email" />
-               </div>
-          </div>
-          <div class="row">
-			<div class="input-field col s12">
-            <label for=""><?php echo _MDP; ?> <a href="remember.php"><?php echo _FMDP; ?></a></label>
-				<input type="password" name="password" />
-				</div>
-              </div>
-          </div>
-         <div class="modal-footer">
-            <button type="submit" class="btn waves-effect waves-light" name="connexion"><?php echo _CCONEXION; ?></button>
+<!-- MODAL CONNEXION-->
+<div id="modalConnexion" class="modal">
+ <div class="modal-content">
+   <h4><?php echo _CONNEXION; ?></h4>
+   <div class="row">
+    <form class="col s12" action="./model/traitementLogin.php" method="POST">
+  <div class="row">
+   <div class="input-field col s12">
+             <label for=""><?php echo _MAIL; ?></label>
+     <input type="text" name="email" />
             </div>
-         </form>
+       </div>
+       <div class="row">
+   <div class="input-field col s12">
+         <label for=""><?php echo _MDP; ?> <a href="remember.php"><?php echo _FMDP; ?></a></label>
+     <input type="password" name="password" />
+     </div>
+           </div>
+       </div>
+      <div class="modal-footer">
+         <button type="submit" class="btn waves-effect waves-light" name="connexion"><?php echo _CCONEXION; ?></button>
          </div>
+      </form>
+      </div>
 
 
-         <?php
-         if(@$_GET['action'] == 'connected' ) {
-          //here we'll be put things when user is connected (newsfeed)
+      <?php
+      if(@$_GET['action'] == 'connected' ) {
+       //here we'll be put things when user is connected (newsfeed)
 
-          echo "<h3>Connecté</h3>";
-          header("Location: ../index.php?action=yay");
-         }
+       echo "<h3>Connecté</h3>";
+       header("Location: ../index.php?action=yay");
+      }
 
-          if(@$_GET['action'] == 'user' ) {
-            echo "<h2 style=\"color:#3080D0; text-align:center;\"> Utilisateur non inscrit </h2>";
-           }
+       if(@$_GET['action'] == 'user' ) {
+         echo "<h2 style=\"color:#3080D0; text-align:center;\"> Utilisateur non inscrit </h2>";
+        }
 
-           if(@$_GET['action'] == 'empty' ) {
-            echo "<h2 style=\"color:#3080D0; text-align:center;\"> Champs vides </h2>";
-           }?>
+        if(@$_GET['action'] == 'empty' ) {
+         echo "<h2 style=\"color:#3080D0; text-align:center;\"> Champs vides </h2>";
+        }?>
 
 
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-	<script>
-	  $(document).ready(function(){
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal();
-  });
-	</script>
-	<script>
-	  $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 100, // Creates a dropdown of 15 years to control year,
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Ok',
-    closeOnSelect: false // Close upon selecting a date,
-  });
-	</script>
-  </body>
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+<script>
+ $(document).ready(function(){
+ // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+ $('.modal').modal();
+});
+</script>
+<script>
+ $('.datepicker').pickadate({
+ selectMonths: true, // Creates a dropdown to control month
+ selectYears: 100, // Creates a dropdown of 15 years to control year,
+ today: 'Today',
+ clear: 'Clear',
+ close: 'Ok',
+ closeOnSelect: false // Close upon selecting a date,
+});
+</script>
+</body>
 </html>
+

@@ -63,7 +63,6 @@ define("_MERCI","благодаря");
 define("_KWORD","Ключови думи");
 define("_SKWORD","Ключови думи (разделени със запетаи)es)");
 define("_TREND","Топ статии");
-define("_VALIDATE","ратифицирам");
 
 
 // APROPOS

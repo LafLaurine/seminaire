@@ -50,31 +50,34 @@ public function archiverArticle($uniq,$keywords)
         
         foreach($keywords as $keyword)
         {
-            $id_keyword = null;
-
-            $req = $db->prepare("SELECT * FROM mot_clef WHERE id_mot_clef=:keyword");
-            $req->bindParam(":keyword",$keyword);
-            $req->execute();
-
-            $fetch = $req->fetch(PDO::FETCH_ASSOC);
-
-            if(!$fetch)
+            if(len(trim($keyword))>=1)
             {
-                $req2 = $db->prepare("INSERT INTO mot_clef(mot_clef) VALUES (?)");
-                $req2->bindParam(1, $keyword);
-                $req2->execute();
+                $id_keyword = null;
 
-                $id_keyword=$db->lastInsertId();
+                $req = $db->prepare("SELECT * FROM mot_clef WHERE id_mot_clef=:keyword");
+                $req->bindParam(":keyword",$keyword);
+                $req->execute();
+
+                $fetch = $req->fetch(PDO::FETCH_ASSOC);
+
+                if(!$fetch)
+                {
+                    $req2 = $db->prepare("INSERT INTO mot_clef(mot_clef) VALUES (?)");
+                    $req2->bindParam(1, $keyword);
+                    $req2->execute();
+
+                    $id_keyword=$db->lastInsertId();
+                }
+                else
+                {
+                    $id_keyword=$fetch['id_mot_clef'];
+                }
+                
+                $req3= $db->prepare("INSERT INTO fav_mot_clef(id_favori,id_mot_clef) VALUES (?,?)");
+                $req3->bindParam(1,$id_fav);
+                $req3->bindParam(2, $id_keyword);
+                $req3->execute();
             }
-            else
-            {
-                $id_keyword=$fetch['id_mot_clef'];
-            }
-            
-            $req3= $db->prepare("INSERT INTO fav_mot_clef(id_favori,id_mot_clef) VALUES (?,?)");
-            $req3->bindParam(1,$id_fav);
-            $req3->bindParam(2, $id_keyword);
-            $req3->execute();
         }
     }
 }

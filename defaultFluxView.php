@@ -1,5 +1,5 @@
-        <div class="flux">
-          <img src="https://cbwconline.com/IMG/Codepen/Blue%20Refresh.svg" id="refresh" class="refreshTrigger" href="javascript:;"/>
+        <div class="ui fluid card">
+        <a class="hide" style="width:0.1em;"><h4 style="width:0.1em;">X</h4></a>
               <img src="">
               <div class="header"><?php echo $flux->titre ?></div>
 

@@ -61,7 +61,6 @@ define("_MERCI","Thank you");
 define("_KWORD","Keywords");
 define("_SKWORD","Keywords (separated by commas)");
 define("_TREND","Top articles");
-define("_VALIDATE","Validate");
 
 
 // APROPOS

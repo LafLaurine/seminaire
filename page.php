@@ -16,7 +16,6 @@ if (!isset($_SESSION['email'])) {
 
 require_once "lang/lang.php";
 
-
 $flux_list = (new ControllerFlux())->getAllActifFlux();
 
 ?>
@@ -26,7 +25,15 @@ $flux_list = (new ControllerFlux())->getAllActifFlux();
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Mews</title>
-
+<style>
+.table-of-contents a.active {
+  border-left: 2px solid #1976D2!important;
+}
+nav .nav-wrapper img{
+  margin-left: 10px;
+  margin-top: 3px;
+}
+</style>
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css">
@@ -76,7 +83,6 @@ $flux_list = (new ControllerFlux())->getAllActifFlux();
       <li><a href="?lang=bg"><img width="40px" src="img/flag/bg.png"></a></li>
   </ul>
 
-
 	  <!--   Présention   -->
 
     <!-- ERROR MESSAGES -->
@@ -102,36 +108,37 @@ $flux_list = (new ControllerFlux())->getAllActifFlux();
           <?php endforeach; ?>
         <?php endif; ?>
 
-	   <div class="container" style="margin-top: 20px;">
-		   <div class="row">
-			   <div class="col s12 m9">
-					<h4 class="left"><?php echo _FILOF; print_r($_SESSION['firstname']); ?></h1>
-        </div>
-
+	 
+        <div class="container" style="margin-top: 20px;">
+        <div class="row">
+          <div class="col s12 m9">
+           <h4 class="left"><?php echo _FILOF; print_r($_SESSION['firstname']); ?></h1>
+         </div>
 
       </div>
-
 
       <a class="waves-effect waves-light btn teal lighten-2 modal-trigger" href="#modal1"><img src="./img/engrenage.png" id="engrenage"/></a>
 
       <!-- Modal Structure -->
       <div id="modal1" class="modal">
         <div class="modal-content">
-          <h4><?php echo _PARAM; ?></h4>
-          <div class="listeFlux">
+        <h4><?php echo _PARAM; ?></h4>
+        <div class="listeFlux">
           <div class="head"><h2 class="flux"><?php echo _LISTFLUX; ?> <span id="compteur_flux"><span id="compteur_flux"><?php echo count($flux_list)?></span> / <span id="limite_flux">6</span></span></h2></div>
             <ul>
-              <li>gnheal
+              <li>gnheal           
+
               <input type="checkbox">
               <div class="Switch Round">
                 <div class="Toggle"></div>
-
+                
               </div>
-              <span class="bout label-primary">Primary Label</span>
-                <span class="bout label-success">Success Label</span>
+        
               </li>
+           
             </ul>
           </div>
+
         </div>
         <div class="modal-footer">
           <a href="#!" class="modal-action modal-close waves-effect waves-blue btn-flat"><?php echo _MERCI; ?></a>
@@ -148,7 +155,7 @@ $flux_list = (new ControllerFlux())->getAllActifFlux();
           </form>
         </div>
         <div class="modal-footer">
-          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="validateFavori">Valider</a>
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="validateFavori"><?php echo _VALIDATE; ?></a>
         </div>
       </div>
 
@@ -162,7 +169,7 @@ $flux_list = (new ControllerFlux())->getAllActifFlux();
               foreach($flux_list as $flux)
               {
                     $j = $i+1;
-                  echo "<div class='column' data-position={$i} data-id='{$j}'>";
+                  echo "<div class='column flux' data-position={$i} data-id='{$j}'>";
                   include($_SERVER['DOCUMENT_ROOT']. '/seminaire/defaultFluxView.php');
                   $i++;
                   echo "</div>";
@@ -173,18 +180,20 @@ $flux_list = (new ControllerFlux())->getAllActifFlux();
           ?>
 
           </div>
+
+          
       </div>
       </div>
         <div class="col hide-on-small-only m3 l3" style="float:right;">
             <div class="toc-wrapper pinned" style="top: 100px;">
               <div class="buysellads hide-on-small-only">
-                <h6><?php echo _KWORD; ?></h6>
+              <h6><?php echo _KWORD; ?></h6>
               </div>
               <div style="height: 1px;">
                 <ul class="section table-of-contents">
-                  <?php $flux = (new ControllerFlux())->getMotclef();
-                 foreach ($flux as $key): ?>
-                  <li><a href="#basic" class="active"><?php echo $key; ?></a></li>
+                  <?php $keywords = (new ControllerFlux())->getMotclef();
+                 foreach ($keywords as $keyword): ?>
+                  <li><a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/seminaire/keywords.php?keyword='.$keyword['mot_clef']?>" class="active"><?php echo $keyword['mot_clef']?> (<?php echo $keyword['nb']; ?>)</a></li>
               <?php endforeach; ?>
                 </ul>
               </div>
@@ -195,13 +204,13 @@ $flux_list = (new ControllerFlux())->getAllActifFlux();
         <div class="col hide-on-small-only m2 l3" style="float:right;">
             <div class="toc-wrapper pinned" style="top: 100px;">
               <div class="buysellads hide-on-small-only">
-                <h6><?php echo _TREND; ?></h6>
+              <h6><?php echo _TREND; ?></h6>
               </div>
               <div style="height: 1px;">
                 <ul class="section table-of-contents">
-                  <?php $flux = (new ControllerFlux())->getFavoriteArticle();
-                 foreach ($flux as $key): ?>
-                  <li><a href="#basic" class="active"><?php echo $key; ?></a></li>
+                  <?php $articles = (new ControllerFlux())->getFavoriteArticle();
+                 foreach ($articles as $article): ?>
+                  <li><a href="<?php echo $article['url']?>" class="active" target="_blank"><?php echo $article['titre']; ?></a></li>
               <?php endforeach; ?>
                 </ul>
               </div>
@@ -209,37 +218,38 @@ $flux_list = (new ControllerFlux())->getAllActifFlux();
           </div>
   </div>
 
+  </div>
 
 
   <footer class="page-footer blue darken-2">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-            <h5 class="white-text"><?php echo _SOCIAL; ?></h5>
-            <ul>
-                <li class="social-footer"><a href="https://www.facebook.com/MewsTeam/?hc_ref=ARROciI1DEdfsZ-LjIlr1VHrxj88BLI1plRKAXzn3IHOMF7-i7O5fSXCtJfS3s5V1vc&fref=nf" target="_blank"><i style='color:white;' class="socialfoot fa fa-facebook-square fa-3x" aria-hidden="true"></i></a></li>
-                <li class="social-footer"><a href="https://twitter.com/wearemews?lang=fr" target="_blank"> <i style='color:white;' class="socialfoot fa fa-twitter-square fa-3x" aria-hidden="true"></i></a></li>
-                <li class="social-footer"><a href="https://www.linkedin.com/in/mews-team-9b240115b/" target="_blank"> <i style='color:white;' class="socialfoot fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
-              </ul>
-          </div>
+  <div class="container">
+    <div class="row">
 
-        <div class="col l3 s12 right">
+      <div class="col l6 s12">
           <h5 class="white-text"><?php echo _SOCIAL; ?></h5>
           <ul>
-            <li><a class="white-text" href="pages/apropos.php"><?php echo _ABOUT; ?></a></li>
-            <li><a class="white-text" href="pages/FAQ.php"><?php echo _FAQ; ?></a></li>
-            <li><a class="white-text" href="pages/mentionslegales.php"><?php echo _MENTION; ?></a></li>
-            <li><a class="white-text" href="pages/conditions.php"><?php echo _USE; ?></a></li>
-          </ul>
+              <li class="social-footer"><a href="https://www.facebook.com/MewsTeam/?hc_ref=ARROciI1DEdfsZ-LjIlr1VHrxj88BLI1plRKAXzn3IHOMF7-i7O5fSXCtJfS3s5V1vc&fref=nf" target="_blank"><i style='color:white;' class="socialfoot fa fa-facebook-square fa-3x" aria-hidden="true"></i></a></li>
+              <li class="social-footer"><a href="https://twitter.com/wearemews?lang=fr" target="_blank"> <i style='color:white;' class="socialfoot fa fa-twitter-square fa-3x" aria-hidden="true"></i></a></li>
+              <li class="social-footer"><a href="https://www.linkedin.com/in/mews-team-9b240115b/" target="_blank"> <i style='color:white;' class="socialfoot fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a></li>
+            </ul>
         </div>
+      <div class="col l3 s12 right">
+        <h5 class="white-text"><?php echo _LINK; ?></h5>
+        <ul>
+          <li><a class="white-text" href="pages/apropos.php"><?php echo _ABOUT; ?></a></li>
+          <li><a class="white-text" href="pages/FAQ.php"><?php echo _FAQ; ?></a></li>
+          <li><a class="white-text" href="pages/mentionslegales.php"><?php echo _MENTION; ?></a></li>
+          <li><a class="white-text" href="pages/conditions.php"><?php echo _USE; ?></a></li>
+        </ul>
       </div>
     </div>
-    <div class="footer-copyright">
-      <div class="container">
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
 
-      </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
   <!--  Scripts-->
 

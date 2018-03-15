@@ -63,7 +63,6 @@ define("_MERCI","Merci");
 define("_KWORD","Mots clef");
 define("_SKWORD","Mots clef (séparés par des virgules)");
 define("_TREND","Top articles");
-define("_VALIDATE","Valider");
 
 
 // APROPOS

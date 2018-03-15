@@ -7,7 +7,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 require_once "lang/lang.php";
 
-
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $_SESSION['lang']; ?>">
@@ -30,6 +29,7 @@ require_once "lang/lang.php";
   </style>
 </head>
 <body>
+
 <div class="navbar-fixed">
 <nav class="white">
   <div class="nav-wrapper">
@@ -46,6 +46,7 @@ require_once "lang/lang.php";
   </div>
 </nav>
 </div>
+
 <ul id="nav-mobile" class="side-nav">
 <li><a class="page" href="./index.php"><i class="material-icons" style="color:black;">home</i></a></li>
 <li><a class="page" href="./page.php"><?php echo _FIL; ?></a></li>
@@ -54,6 +55,7 @@ require_once "lang/lang.php";
 <li><a href="?lang=en"><img width="38px" src="img/flag/en.png"></a></li>
 <li><a href="?lang=bg"><img width="40px" src="img/flag/bg.png"></a></li>
 </ul>
+
 
 <h2 class="center-align"><?php echo _MYFAV; ?> <i class="small material-icons">favorite</i></h2>
 
@@ -121,3 +123,4 @@ require_once "lang/lang.php";
 
   </body>
 </html>
+
