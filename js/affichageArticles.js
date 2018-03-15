@@ -23,15 +23,25 @@ $( document ).ready(function(){
 		$('.flux').find(".articles_list").eq(0).find('.ui').css("width", "100%");
 
 var taille = $('ui').css('width');
+var trigger = false;
 	$('.flux').click(function() {
+		if (trigger == false) {
+			trigger = true;
+			$(this).find('.column').css("z-index", "100");
+			$(this).find('.ui.fluid.card').css("width", "700px");
+		} else {
+			trigger = false;
+			$(this).find('.column').css("z-index", "1");
+			$(this).find('.ui.fluid.card').css("width", "100%");
+
+		}
 		$(this).find(".articles_list").eq(0).toggle();
 		var result = $( this ).attr('data-position');
-		$(this).find('.column').css("z-index", "100");
-		$(this).find('.ui').css("width", "700px");
+
 	});
 
-
 	$('.modal-trigger').click(function() {
+
 
 	   $(".listeFlux").eq(0).find("ul").eq(0).html("<li>CHARGEMENT DE LA LISTE...</li>");
 
