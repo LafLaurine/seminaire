@@ -11,18 +11,25 @@ $( document ).ready(function(){
 	get_active_flux_list().done(data => {refresh_all(data); }).fail((xhr, status, error)=>{console.log(xhr,status,error);});
 
 	$("body").on("click",".hide",function(e){
-		
+
 				console.log("clicked on : ",e,$(".hide").index(this));
-		
+
 				e.preventDefault();
 				var i = $(".hide").index(this);
-				remove(flux_actif[i]);				
+				remove(flux_actif[i]);
 	});
 
-	
-	$('.flux>.card').click(function() {
+
+		$('.flux').find(".articles_list").eq(0).find('.ui').css("width", "100%");
+
+var taille = $('ui').css('width');
+	$('.flux').click(function() {
 		$(this).find(".articles_list").eq(0).toggle();
+		var result = $( this ).attr('data-position');
+		$(this).find('.column').css("z-index", "100");
+		$(this).find('.ui').css("width", "700px");
 	});
+
 
 	$('.modal-trigger').click(function() {
 
@@ -33,7 +40,7 @@ $( document ).ready(function(){
 
 
 	$('body').on("click",".Switch",function() {
-			
+
 		toggleSwitch($(".Switch").index($(this)));
 	});
 
@@ -90,12 +97,12 @@ function refresh_all(flux_URIs)
 		(function loop(uri) {
 			refresh(uri).done(data => {console.log("loading",uri,flux_actif.indexOf(uri));  $(".articles_list").eq(flux_actif.indexOf(uri)).html(data);});
 		})(uri);
-		
+
 	}
 }
 
 function refresh(uri)
-{ 
+{
 	return $.ajax({
 		type:"GET",
 		url:"http://localhost/seminaire/flux.php",
@@ -131,7 +138,7 @@ function remove(uri){
 			$('#demoForm').show(500);*/
 		}
 	});
-}	
+}
 
 function add(uri){
 
@@ -164,7 +171,7 @@ function add(uri){
 	}
 	else
 	{
-		
+
 	}
 }
 
@@ -197,25 +204,25 @@ function render(list)
 		div.append(balise);
 
 		setSwitch($('.Switch').eq(i),flux.actif);
-		
+
 		hideCheckbox();
 		i++;
 	}
-	
+
 }
 
 function hideCheckbox()
 {
 		  // Loops Through Each Toggle Switch On Page
 		  $('.Switch').each(function() {
-		
+
 			// Search of a checkbox within the parent
 			if ($(this).parent().find('input:checkbox').length){
-			  
+
 			  if (!$(this).parent().find('input:checkbox').hasClass("show")){ $(this).parent().find('input:checkbox').hide(); }
-			  
+
 			  }
-			  
+
 			}
 		);
 }
@@ -227,27 +234,27 @@ function toggleSwitch(index)
 	var flux_uri = flux_URIs[index];
 
 	if (balise.hasClass('On')){
-		
+
 		if(flux_actif.length>1)
 		{
 			balise.parent().find('input:checkbox').attr('checked', true);
-			
-		
+
+
 			balise.removeClass('On').addClass('Off');
 
-			
+
 			remove(flux_uri);
 		}
-		
-	  } else{ 
+
+	  } else{
 		if(flux_actif.length<6)
 		{
 			balise.parent().find('input:checkbox').attr('checked', false);
 
 			balise.removeClass('Off').addClass('On');
-	
+
 			add(flux_uri);
-		}	
+		}
 	}
 }
 
@@ -256,17 +263,17 @@ function setSwitch(balise,active)
 	console.log(active);
 
 	if (!active){
-		
+
 		balise.parent().find('input:checkbox').attr('checked', false);
-		
-	   
+
+
 		balise.addClass('Off');
-		
-	  } else { 
+
+	  } else {
 		balise.parent().find('input:checkbox').attr('checked', true);
 
 		balise.addClass('On');
-		
+
 	}
 }
 
@@ -278,11 +285,11 @@ function fav(uri)
 		data:
 			{
 				article: uri,
-				keywords: $("#keywords").val().split(",") 	
+				keywords: $("#keywords").val().split(",")
 			},
 		dataType:'html',
 		success : function(data){
-			keywords: $("#keywords").val("");		
+			keywords: $("#keywords").val("");
 			$('.fav').addClass('dejaFav');
 			$('.fav').val('Déjà en favori');
 		},
@@ -300,7 +307,7 @@ function modalFav(uri)
 	$("#validateFavori").off();
 
 	$("#validateFavori").click(function()
-	{	
+	{
 		fav(uri);
 	});
 }

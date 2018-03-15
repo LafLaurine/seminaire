@@ -33,6 +33,15 @@ nav .nav-wrapper img{
   margin-left: 10px;
   margin-top: 3px;
 }
+body {
+display: flex;
+min-height: 100vh;
+flex-direction: column;
+}
+
+main {
+flex: 1 0 auto;
+}
 </style>
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -55,6 +64,15 @@ nav .nav-wrapper img{
     float: left;
     margin-left: 10px;
   }
+  body {
+display: flex;
+min-height: 100vh;
+flex-direction: column;
+}
+
+main {
+flex: 1 0 auto;
+}
   </style>
 </head>
 <body>
@@ -108,7 +126,8 @@ nav .nav-wrapper img{
           <?php endforeach; ?>
         <?php endif; ?>
 
-	 
+        <main>
+
         <div class="container" style="margin-top: 20px;">
         <div class="row">
           <div class="col s12 m9">
@@ -119,6 +138,7 @@ require_once $_SERVER['DOCUMENT_ROOT']. '/seminaire/controller/controllerFlux.ph
   session_start();
 }
 ?>
+
 
 <?php if(isset($_GET['keyword'])) : ?>
 
@@ -134,6 +154,8 @@ require_once $_SERVER['DOCUMENT_ROOT']. '/seminaire/controller/controllerFlux.ph
          </div>
 
       </div>
+    </div>
+       </main>
 
   <footer class="page-footer blue darken-2">
     <div class="container">

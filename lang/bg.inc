@@ -58,7 +58,7 @@ define("_CINSCRIPTION","Регистрирам се");
 define("_FMDP","(Забравена парола)");
 define("_CCONEXION","Влизам");
 define("_PARAM","настройки");
-define("_LISTFLUX","Влизам");
+define("_LISTFLUX","списък с потоци");
 define("_MERCI","благодаря");
 define("_KWORD","Ключови думи");
 define("_SKWORD","Ключови думи (разделени със запетаи)es)");

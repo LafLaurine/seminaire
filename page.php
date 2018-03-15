@@ -33,6 +33,26 @@ nav .nav-wrapper img{
   margin-left: 10px;
   margin-top: 3px;
 }
+
+    body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  }
+
+  main {
+  flex: 1 0 auto;
+  }
+  .social-footer{
+    float: left;
+    margin-left: 10px;
+  }
+  .articles_list{
+    width: 700px;
+  }
+  .column{
+    z-index: 0;
+  }
 </style>
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -43,19 +63,6 @@ nav .nav-wrapper img{
   <script src="./js/affichageArticles.js"></script>
   <link rel="icon" type="image/png" href="img/logo/fav.ico"/>
   <link type="text/css" rel="stylesheet" href="css/font-awesome.css"/>
-  <style>
-  .table-of-contents a.active {
-    border-left: 2px solid #1976D2!important;
-  }
-  nav .nav-wrapper img{
-    margin-left: 10px;
-    margin-top: 3px;
-  }
-  .social-footer{
-    float: left;
-    margin-left: 10px;
-  }
-  </style>
 </head>
 <body>
   <div class="navbar-fixed">
@@ -108,7 +115,7 @@ nav .nav-wrapper img{
           <?php endforeach; ?>
         <?php endif; ?>
 
-	 
+        <main>
         <div class="container" style="margin-top: 20px;">
         <div class="row">
           <div class="col s12 m9">
@@ -126,16 +133,16 @@ nav .nav-wrapper img{
         <div class="listeFlux">
           <div class="head"><h2 class="flux"><?php echo _LISTFLUX; ?> <span id="compteur_flux"><span id="compteur_flux"><?php echo count($flux_list)?></span> / <span id="limite_flux">6</span></span></h2></div>
             <ul>
-              <li>gnheal           
+              <li>gnheal
 
               <input type="checkbox">
               <div class="Switch Round">
                 <div class="Toggle"></div>
-                
+
               </div>
-        
+
               </li>
-           
+
             </ul>
           </div>
 
@@ -181,7 +188,7 @@ nav .nav-wrapper img{
 
           </div>
 
-          
+
       </div>
       </div>
         <div class="col hide-on-small-only m3 l3" style="float:right;">
@@ -219,7 +226,7 @@ nav .nav-wrapper img{
   </div>
 
   </div>
-
+</main>
 
   <footer class="page-footer blue darken-2">
   <div class="container">

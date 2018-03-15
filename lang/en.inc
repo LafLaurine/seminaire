@@ -16,7 +16,7 @@ define("_TEXTEPRESENTATION","Mews is a site that allows you to have in your news
            9 young people passionate about the web and the news.
            Graphic designers, web developers and communicators work together to offer you a quality service.
            Dynamism, creativity and quality are at the heart of our project!");
-define("_DESCRIPTIONUN","Des nouvelles en temps réel");
+define("_DESCRIPTIONUN","Real time news");
 define("_TEXTEDESCRIPTIONUN","No more searching for news on different sites
 With Mews you can follow news in real time and anywhere in the world. Similarly, a simple search can help you find the article you are looking for.");
 define("_DESCRIPTIONDEUX","Customizing the news feed");
@@ -56,7 +56,7 @@ define("_CINSCRIPTION","Register");
 define("_FMDP","(Forgot your password)");
 define("_CCONEXION","Connection");
 define("_PARAM","Settings");
-define("_LISTFLUX","Connextion");
+define("_LISTFLUX","stream list");
 define("_MERCI","Thank you");
 define("_KWORD","Keywords");
 define("_SKWORD","Keywords (separated by commas)");

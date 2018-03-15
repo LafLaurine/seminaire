@@ -58,7 +58,7 @@ define("_CINSCRIPTION","Je m'inscris");
 define("_FMDP","(Mot de passe oublié)");
 define("_CCONEXION","Je me connecte");
 define("_PARAM","Paramètres");
-define("_LISTFLUX","Je me connecte");
+define("_LISTFLUX","Liste des flux");
 define("_MERCI","Merci");
 define("_KWORD","Mots clef");
 define("_SKWORD","Mots clef (séparés par des virgules)");

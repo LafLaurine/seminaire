@@ -81,6 +81,8 @@ require_once "lang/lang.php";
 </ul>
 <?php endif; ?>
 
+<main>
+
     <!-- ERROR MESSAGES -->
     <?php if(isset($_SESSION['flash'])):?>
     <?php foreach ($_SESSION['flash'] as $type => $message):
@@ -201,6 +203,8 @@ require_once "lang/lang.php";
 
 <!--  FOOTER -->
 </div>
+
+</main>
   <footer class="page-footer blue darken-2">
     <div class="container">
       <div class="row">
@@ -377,4 +381,3 @@ echo "<h2 style=\"color:#3080D0; text-align:center;\"> Compte enregistré </h2>"
 </script>
 </body>
 </html>
-
